@@ -275,6 +275,78 @@
             transform: translateY(0);
         }
 
+        /* YouTube Music Player */
+        .music-section {
+            padding: 60px 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .music-section h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .youtube-player {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 3px solid transparent;
+            background: var(--gradient);
+            padding: 3px;
+        }
+
+        .youtube-player iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 18px;
+            display: block;
+        }
+
+        .music-note {
+            position: absolute;
+            font-size: 30px;
+            color: var(--primary);
+            animation: floatNote 3s infinite ease-in-out;
+            z-index: 2;
+        }
+
+        @keyframes floatNote {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .song-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .song-info h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .song-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
         /* Memories Timeline */
         .memories {
             padding: 80px 40px;
@@ -448,54 +520,6 @@
             letter-spacing: 2px;
         }
 
-        /* Interactive Music Player */
-        .music-player {
-            text-align: center;
-            margin: 80px 0;
-            position: relative;
-        }
-
-        .play-btn {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 25px 60px;
-            font-size: 1.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.3);
-        }
-
-        .play-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .play-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.5);
-        }
-
-        .play-btn:hover::before {
-            left: 100%;
-        }
-
-        .play-btn i {
-            font-size: 2rem;
-        }
-
         /* Interactive Footer */
         .footer {
             text-align: center;
@@ -578,6 +602,7 @@
             }
             .timer-box { min-width: 120px; padding: 30px 15px; }
             .timer-box span { font-size: 3rem; }
+            .youtube-player iframe { height: 250px; }
         }
 
         /* Scroll Animations */
@@ -696,6 +721,38 @@
             </div>
         </section>
 
+        <!-- YouTube Music Player -->
+        <section class="music-section fade-in">
+            <h2>Our Special Song 🎵</h2>
+            
+            <div class="song-info">
+                <h3><i class="fas fa-heart" style="color: #ff4d6d;"></i> A Song That Reminds Me of Us</h3>
+                <p>This melody captures exactly how I feel when I'm with you - magical, romantic, and forever 💖</p>
+            </div>
+            
+            <div class="youtube-player">
+                <!-- Music notes animation -->
+                <div class="music-note" style="top: 20px; left: 30px;">♪</div>
+                <div class="music-note" style="top: 50px; right: 40px; animation-delay: 0.5s;">♫</div>
+                <div class="music-note" style="bottom: 30px; left: 50px; animation-delay: 1s;">🎵</div>
+                
+                <!-- YouTube Player -->
+                <iframe 
+                    src="https://www.youtube.com/embed/aq7PH4b7pl0?autoplay=0&controls=1&showinfo=0&rel=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div style="margin-top: 30px; color: var(--accent);">
+                <p><i class="fas fa-volume-up"></i> Turn up the volume and feel the love!</p>
+                <button onclick="togglePlay()" id="playBtn" style="margin-top: 15px; padding: 12px 30px; background: var(--gradient); border: none; border-radius: 25px; color: white; cursor: pointer; font-size: 1.1rem;">
+                    <i class="fas fa-play"></i> Play Song
+                </button>
+            </div>
+        </section>
+
         <!-- Interactive Timeline Memories -->
         <section class="memories">
             <h2 class="fade-in">Our Journey Together</h2>
@@ -763,22 +820,6 @@
             </p>
         </section>
 
-        <!-- Interactive Music Player -->
-        <section class="music-player fade-in">
-            <button class="play-btn" id="playMusic">
-                <i class="fas fa-play-circle"></i>
-                <span>Play Our Love Song</span>
-            </button>
-            <div style="margin-top: 20px; color: var(--accent);">
-                <i class="fas fa-music"></i> Click for a romantic melody that reminds me of us
-            </div>
-            
-            <!-- Visualizer -->
-            <div id="visualizer" style="margin-top: 40px; height: 100px; display: none;">
-                <canvas id="audioCanvas" width="800" height="100"></canvas>
-            </div>
-        </section>
-
         <!-- Interactive Footer with Secret -->
         <footer class="footer fade-in">
             <p>Made with <span style="color: var(--primary);">❤️</span> for the most amazing person in the universe</p>
@@ -812,6 +853,11 @@
     </div>
 
     <script>
+        // YouTube Video ID from your link
+        const youtubeVideoId = 'aq7PH4b7pl0';
+        let youtubePlayer;
+        let isPlaying = false;
+
         // Initialize Background Elements
         function createBackgroundHearts() {
             const bgHearts = document.getElementById('bgHearts');
@@ -839,6 +885,38 @@
                 particle.style.animationDelay = Math.random() * 15 + 's';
                 particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 particles.appendChild(particle);
+            }
+        }
+
+        // YouTube Player Control
+        function togglePlay() {
+            const playBtn = document.getElementById('playBtn');
+            const iframe = document.querySelector('.youtube-player iframe');
+            
+            if (!isPlaying) {
+                // Get current src
+                let src = iframe.src;
+                // Add autoplay parameter
+                iframe.src = src.replace('autoplay=0', 'autoplay=1');
+                playBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Song';
+                playBtn.style.background = 'linear-gradient(45deg, #a4133c, #ff4d6d)';
+                isPlaying = true;
+                
+                // Add pulse effect to music notes
+                document.querySelectorAll('.music-note').forEach(note => {
+                    note.style.animationDuration = '1s';
+                });
+            } else {
+                // Pause video using postMessage
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                playBtn.innerHTML = '<i class="fas fa-play"></i> Play Song';
+                playBtn.style.background = 'linear-gradient(135deg, #ff4d6d, #ff758f, #ff8fa3)';
+                isPlaying = false;
+                
+                // Reset music notes animation
+                document.querySelectorAll('.music-note').forEach(note => {
+                    note.style.animationDuration = '3s';
+                });
             }
         }
 
@@ -871,96 +949,6 @@
                 }, 300);
             });
         }
-
-        // Audio Visualizer
-        let audioContext, analyser, source, dataArray, bufferLength;
-        let canvas, ctx;
-
-        function initAudioVisualizer() {
-            canvas = document.getElementById('audioCanvas');
-            ctx = canvas.getContext('2d');
-        }
-
-        function drawVisualizer() {
-            if (!analyser) return;
-            
-            requestAnimationFrame(drawVisualizer);
-            
-            analyser.getByteFrequencyData(dataArray);
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            const barWidth = (canvas.width / bufferLength) * 2.5;
-            let barHeight;
-            let x = 0;
-            
-            // Create gradient for bars
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-            gradient.addColorStop(0, '#ff4d6d');
-            gradient.addColorStop(0.5, '#ff758f');
-            gradient.addColorStop(1, '#ffb3c6');
-            
-            for(let i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i] / 2;
-                
-                ctx.fillStyle = gradient;
-                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-                
-                x += barWidth + 1;
-            }
-        }
-
-        // Music Player with Visualizer
-        let audio = null;
-        document.getElementById('playMusic').addEventListener('click', async function() {
-            const playBtn = this;
-            const visualizer = document.getElementById('visualizer');
-            
-            if (!audio) {
-                try {
-                    audio = new Audio('https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3');
-                    
-                    // Initialize audio context for visualizer
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioContext.createAnalyser();
-                    source = audioContext.createMediaElementSource(audio);
-                    source.connect(analyser);
-                    analyser.connect(audioContext.destination);
-                    
-                    analyser.fftSize = 256;
-                    bufferLength = analyser.frequencyBinCount;
-                    dataArray = new Uint8Array(bufferLength);
-                    
-                    initAudioVisualizer();
-                    visualizer.style.display = 'block';
-                    
-                    audio.play();
-                    playBtn.innerHTML = '<i class="fas fa-pause-circle"></i><span>Playing Our Song</span>';
-                    playBtn.style.background = 'linear-gradient(45deg, #a4133c, #ff4d6d)';
-                    
-                    drawVisualizer();
-                    
-                    audio.onended = () => {
-                        playBtn.innerHTML = '<i class="fas fa-play-circle"></i><span>Play Again</span>';
-                        playBtn.style.background = 'linear-gradient(45deg, #ff4d6d, #ff758f)';
-                        visualizer.style.display = 'none';
-                    };
-                    
-                } catch (error) {
-                    console.error('Audio error:', error);
-                    playBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i><span>Error Loading</span>';
-                }
-            } else if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = '<i class="fas fa-pause-circle"></i><span>Playing Our Song</span>';
-                visualizer.style.display = 'block';
-                drawVisualizer();
-            } else {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fas fa-play-circle"></i><span>Resume Song</span>';
-                visualizer.style.display = 'none';
-            }
-        });
 
         // Secret Message with Advanced Effects
         function showSecretMessage() {
@@ -1100,14 +1088,28 @@
             document.querySelector('.love-letter').style.transform = `translate(${-x * 0.5}px, ${-y * 0.5}px) rotateX(${y * 0.1}deg) rotateY(${x * 0.1}deg)`;
         });
 
-        // Touch device compatibility
-        document.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            const x = (touch.clientX / window.innerWidth - 0.5) * 10;
-            const y = (touch.clientY / window.innerHeight - 0.5) * 10;
-            
-            document.querySelector('.header').style.transform = `translate(${x}px, ${y}px)`;
-        });
+        // YouTube API for better control
+        function onYouTubeIframeAPIReady() {
+            youtubePlayer = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            console.log('YouTube player ready');
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                console.log('Song started playing');
+            }
+        }
     </script>
+    
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
